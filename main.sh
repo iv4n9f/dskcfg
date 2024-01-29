@@ -3,8 +3,10 @@
 dir=$(pwd)
 user=$(whoami)
 
+# Initial Enviroment
+
 sudo apt update
-sudo apt-get install make gcc libxcb-xinerama0-dev libxcb-icccm4-dev libxcb-randr0-dev libxcb-util0-dev libxcb-ewmh-dev libxcb-keysyms1-dev libxcb-shape0-dev polybar bspwm sxhkd rofi feh-y
+sudo apt-get install make gcc libxcb-xinerama0-dev libxcb-icccm4-dev libxcb-randr0-dev libxcb-util0-dev libxcb-ewmh-dev libxcb-keysyms1-dev libxcb-shape0-dev polybar bspwm sxhkd rofi feh -y
 
 git clone https://github.com/baskerville/bspwm.git
 git clone https://github.com/baskerville/sxhkd.git
@@ -28,3 +30,11 @@ echo "exec bspwm" >> /home/$user/.xinitrc
 chmod u+x /home/$user/.config/bspwm/bspwmrc
 chmod u+x /home/$user/.config/polybar/launch.sh
 chmod u+x /home/$user/.config/bspwm/scripts/bspwm_resize
+
+# Fonts
+
+cd /home/$user/Downloads
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/Gohu.zip
+sudo unzip Gohu.zip -d /usr/share/fonts/
+
+cd $dir
