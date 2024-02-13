@@ -4,7 +4,7 @@ super + Return
 
 # program launcher
 super + d
-	rofi -show run
+	rofi -show run -theme rounded-blue-dark
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -106,7 +106,7 @@ alt + super + {Left,Down,Up,Right}
 # Optional
 
 super + g
-	brave --incognito
+	brave
 
 super + b
 	bitwarden

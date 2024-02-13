@@ -3,6 +3,7 @@
 password="password"
 dir=$(pwd)
 user=$(whoami)
+timezone="Europe/Madrid"
 
 # Initial Enviroment
 
@@ -49,6 +50,15 @@ sudo unzip Hack.zip -d /usr/share/fonts/
 
 cd $dir
 
+# Themes
+
+git clone https://github.com/lr-tech/rofi-themes-collection.git
+cd rofi-themes-collection
+mkdir -p ~/.local/share/rofi/themes/
+cp themes/rounded-common.rasi ~/.local/share/rofi/themes/
+cp themes/rounded-blue-dark.rasi ~/.local/share/rofi/themes/
+
+
 # Utils
 
 sudo apt-get install snapd -y && sudo systemctl enable snapd.apparmor && sudo systemctl start snapd.apparmor
@@ -56,7 +66,13 @@ sudo systemctl enable snapd.socket && sudo systemctl start snapd.socket
 sudo ln -s /var/lib/snapd/snap /snap
 sleep 10
 sudo snap install code --classic
-sudo snap install brave bitwarden
+sudo snap install bitwarden
+
+sudo apt install curl
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+sudo apt update
+sudo apt install brave-browser -y
 
 # Personal Config
 
