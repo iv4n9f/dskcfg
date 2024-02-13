@@ -1,0 +1,4 @@
+#/bin/bash
+openssl pkeyutl -decrypt -inkey ~/Credentials/.keys/private_key.pem -in ~/Credentials/bit.enc -out  ~/Credentials/.tmp/bit.pas
+cat ~/Credentials/.tmp/bit.pas | xclip -selection clipboard && rm ~/Credentials/.tmp/bit.pas
+/snap/bin/bitwarden
