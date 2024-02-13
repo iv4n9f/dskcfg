@@ -88,3 +88,8 @@ openssl pkeyutl -encrypt -pubin -inkey /home/$user/Credentials/.keys/public_key.
 set_target localhost
 
 rm -r /home/$user/Downloads/bspwm /home/$user/Downloads/sxhkd /home/$user/Downloads/rofi-themes-collection /home/$user/Downloads/Hack.zip
+
+sudo cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
+sudo sed -i 's/#autologin-user=/autologin-user='$user'/g' /etc/lightdm/lightdm.conf
+sudo sed -i 's/theme-name=Adwaita/theme-name=elementary Dark/g' /etc/lightdm/lightdm-gtk-greeter.conf
+sudo sed -i 's/background=/usr/share/images/desktop-base/login-background.svg//home/$user/Pictures/wallpaper.png/g' /etc/lightdm/lightdm-gtk-greeter.conf
