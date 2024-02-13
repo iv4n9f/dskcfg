@@ -7,7 +7,7 @@ user=$(whoami)
 # Initial Enviroment
 
 sudo apt update
-sudo apt-get install make gcc libxcb-xinerama0-dev libxcb-icccm4-dev libxcb-randr0-dev libxcb-util0-dev libxcb-ewmh-dev libxcb-keysyms1-dev libxcb-shape0-dev polybar bspwm sxhkd rofi feh python3-pip net-tools gnome-terminal lm-sensors xclip jq -y
+sudo apt-get install make gcc libxcb-xinerama0-dev libxcb-icccm4-dev libxcb-randr0-dev libxcb-util0-dev libxcb-ewmh-dev libxcb-keysyms1-dev libxcb-shape0-dev polybar bspwm sxhkd rofi feh python3-pip net-tools gnome-terminal lm-sensors xclip jq wireguard resolvconf -y
 
 git clone https://github.com/baskerville/bspwm.git
 git clone https://github.com/baskerville/sxhkd.git
@@ -51,20 +51,20 @@ cd $dir
 
 # Utils
 
-sleep 10
-
 sudo apt-get install snapd -y && sudo systemctl enable snapd.apparmor && sudo systemctl start snapd.apparmor
 sudo systemctl enable snapd.socket && sudo systemctl start snapd.socket
 sudo ln -s /var/lib/snapd/snap /snap
+sleep 10
 sudo snap install code --classic
 sudo snap install brave bitwarden
 
 # Personal Config
 
-echo $password > /home/$user/Credentials/bit.pas
 mkdir /home/$user/Credentials /home/$user/Projects /home/$user/Downloads /home/$user/Pictures /home/$user/Videos /home/$user/Music /home/$user/Documents /home/$user/.ssh
 sudo chown -R $user:$user /home/$user/Credentials /home/$user/Projects /home/$user/Downloads /home/$user/Pictures /home/$user/Videos /home/$user/Music /home/$user/Documents /home/$user/.ssh
-mkdir /home/$user/Credentials/.tmp /home/$user/Credentials/.keys
+echo "$password" > /home/$user/Credentials/bit.pas && echo "$password" > /home/$user/Credentials/bit.pass
+mkdir -p /home/$user/Credentials/.tmp /home/$user/Credentials/.keys
 openssl genpkey -algorithm RSA -out /home/$user/Credentials/.keys/private_key.pem
 openssl rsa -pubout -in /home/$user/Credentials/.keys/private_key.pem -out /home/$user/Credentials/.keys/public_key.pem
-openssl pkeyutl -encrypt -pubin -inkey /home/$user/Credentials/.keys/public_key.pem -in /home/$user/Credentials/bit.pas -out /home/$user/Credentials/bit.enc && rm -r /home/$user/Credentials/bit.pas
+openssl pkeyutl -encrypt -pubin -inkey /home/$user/Credentials/.keys/public_key.pem -in /home/$user/Credentials/bit.pas -out /home/$user/Credentials/bit.enc && rm /home/$user/Credentials/bit.pas
+set_target 8.8.8.8
