@@ -67,4 +67,4 @@ mkdir -p /home/$user/Credentials/.tmp /home/$user/Credentials/.keys
 openssl genpkey -algorithm RSA -out /home/$user/Credentials/.keys/private_key.pem
 openssl rsa -pubout -in /home/$user/Credentials/.keys/private_key.pem -out /home/$user/Credentials/.keys/public_key.pem
 openssl pkeyutl -encrypt -pubin -inkey /home/$user/Credentials/.keys/public_key.pem -in /home/$user/Credentials/bit.pas -out /home/$user/Credentials/bit.enc && rm /home/$user/Credentials/bit.pas
-set_target 8.8.8.8
+set_target localhost
