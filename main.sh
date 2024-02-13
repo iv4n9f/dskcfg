@@ -32,6 +32,7 @@ echo "exec bspwm" >> /home/$user/.xinitrc
 chmod u+x /home/$user/.config/bspwm/bspwmrc
 chmod u+x /home/$user/.config/polybar/launch.sh
 chmod u+x /home/$user/.config/bspwm/scripts/bspwm_resize
+chmod +x /home/$user/.config/polybar/modules/*.sh
 
 # Fonts
 
