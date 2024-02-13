@@ -24,7 +24,7 @@ cp $dir/config.ini /home/$user/.config/polybar/
 cp $dir/launch.sh /home/$user/.config/polybar/
 cp -r $dir/modules/ /home/$user/.config/polybar/
 cp $dir/bspwm_resize /home/$user/.config/bspwm/scripts/bspwm_resize
-cp $dir/wallpaper.jpeg /home/$user/Pictures/wallpaper.png
+cp $dir/wallpaper.png /home/$user/Pictures/wallpaper.png
 cp /etc/X11/xinit/xinitrc /home/$user/.xinitrc
 
 echo "exec bspwm" >> /home/$user/.xinitrc
