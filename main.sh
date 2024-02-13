@@ -27,7 +27,7 @@ cp -r $dir/modules/ /home/$user/.config/polybar/
 cp $dir/bspwm_resize /home/$user/.config/bspwm/scripts/bspwm_resize
 cp $dir/wallpaper.png /home/$user/Pictures/wallpaper.png
 sudo cp $dir/set_target /usr/bin/set_target
-sudo cp $dir/btiwarden /usr/bin/btiwarden
+sudo cp $dir/bitwarden /usr/bin/bitwarden
 sudo cp $dir/brave /usr/bin/brave
 cp /etc/X11/xinit/xinitrc /home/$user/.xinitrc
 
@@ -38,7 +38,7 @@ chmod u+x /home/$user/.config/polybar/launch.sh
 chmod u+x /home/$user/.config/bspwm/scripts/bspwm_resize
 chmod +x /home/$user/.config/polybar/modules/*.sh
 sudo chmod +x /usr/bin/set_target
-sudo chmod +x /usr/bin/btiwarden
+sudo chmod +x /usr/bin/bitwarden
 sudo chmod +x /usr/bin/brave
 
 # Fonts
@@ -50,6 +50,8 @@ sudo unzip Hack.zip -d /usr/share/fonts/
 cd $dir
 
 # Utils
+
+sleep 10
 
 sudo apt-get install snapd -y && sudo systemctl enable snapd.apparmor && sudo systemctl start snapd.apparmor
 sudo systemctl enable snapd.socket && sudo systemctl start snapd.socket
