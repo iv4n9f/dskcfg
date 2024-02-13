@@ -48,10 +48,8 @@ cd /home/$user/Downloads
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/Hack.zip
 sudo unzip Hack.zip -d /usr/share/fonts/
 
-cd $dir
-
 # Themes
-
+cd /home/$user/Downloads
 git clone https://github.com/lr-tech/rofi-themes-collection.git
 cd rofi-themes-collection
 mkdir -p ~/.local/share/rofi/themes/
@@ -60,6 +58,8 @@ cp themes/rounded-blue-dark.rasi ~/.local/share/rofi/themes/
 
 
 # Utils
+
+cd $dir
 
 sudo apt-get install snapd -y && sudo systemctl enable snapd.apparmor && sudo systemctl start snapd.apparmor
 sudo systemctl enable snapd.socket && sudo systemctl start snapd.socket
