@@ -62,7 +62,7 @@ sudo snap install brave bitwarden
 
 mkdir /home/$user/Credentials /home/$user/Projects /home/$user/Downloads /home/$user/Pictures /home/$user/Videos /home/$user/Music /home/$user/Documents /home/$user/.ssh
 sudo chown -R $user:$user /home/$user/Credentials /home/$user/Projects /home/$user/Downloads /home/$user/Pictures /home/$user/Videos /home/$user/Music /home/$user/Documents /home/$user/.ssh
-echo "$password" > /home/$user/Credentials/bit.pas && echo "$password" > /home/$user/Credentials/bit.pass
+echo "$password" > /home/$user/Credentials/bit.pas
 mkdir -p /home/$user/Credentials/.tmp /home/$user/Credentials/.keys
 openssl genpkey -algorithm RSA -out /home/$user/Credentials/.keys/private_key.pem
 openssl rsa -pubout -in /home/$user/Credentials/.keys/private_key.pem -out /home/$user/Credentials/.keys/public_key.pem
