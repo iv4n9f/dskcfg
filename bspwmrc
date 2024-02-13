@@ -2,7 +2,7 @@
 
 sxhkd &
 wmname LG3D &
-feh --bg-fill ~/Pictures/wallpaper.jpeg &
+feh --bg-fill ~/Pictures/wallpaper.png &
 
 bspc config pointer_modifier mod1
 
