@@ -6,7 +6,7 @@ ram_usage=$(free -m | awk '/Mem/ { printf "%.2f", $3/$2 * 100 }')
 swap_usage=$(free -m | awk '/Swap/ { printf "%.2f", $3/$2 * 100 }')
 root_usage=$(df -h / | awk '/\// {print $(NF-1)}')
 home_usage=$(df -h /home | awk '/home/ {print $(NF-1)}')
-# external_usage=$(df -h /mnt | awk '/mnt/ {print $(NF-1)}')
+# external_usage=$(df -h /mnt/storage | awk '/mnt/storage {print $(NF-1)}')
 
 # Output
 

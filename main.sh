@@ -41,7 +41,7 @@ mkdir -p /home/$user/.config/{bspwm,sxhkd,polybar}
 mkdir /home/$user/.config/bspwm/scripts/
 mkdir /home/$user/.config/polybar/modules/
 mkdir -p /usr/share/pictures
-mkdir -p $davfs_mount_point
+sudo mkdir -p $davfs_mount_point
 
 # Download 
 

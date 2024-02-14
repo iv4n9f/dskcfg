@@ -29,5 +29,5 @@ sudo echo -e "$DAVFS_URL $USERNAME $ESCAPED_PASSWORD" >> "$CREDENTIALS_FILE"
 echo "Mounting DAVFS share..."
 sudo mount -t davfs "$DAVFS_URL" "$MOUNT_POINT" -o rw,uid=$(id -u),gid=$(id -g)
 
-echo -e "$DAVFS_URL $MOUNT_POINT davfs _netdev,auto 0 0" | sudo tee -a /etc/fstab > /dev/null
+sudo echo -e "$DAVFS_URL $MOUNT_POINT davfs _netdev,auto 0 0" | sudo tee -a /etc/fstab > /dev/null
 echo "DAVFS share mounted at $MOUNT_POINT and added to /etc/fstab"
