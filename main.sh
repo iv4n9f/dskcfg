@@ -15,10 +15,15 @@ user=$(whoami)
 timedatectl set-timezone $timezone
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list 
+sudo apt install wget gpg apt-transport-https -y
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+rm -f packages.microsoft.gpg
+
 
 sudo apt update
-sudo apt install  -y
-sudo apt-get install make gcc libxcb-xinerama0-dev libxcb-icccm4-dev libxcb-randr0-dev libxcb-util0-dev libxcb-ewmh-dev libxcb-keysyms1-dev libxcb-shape0-dev polybar bspwm sxhkd rofi feh python3-pip net-tools gnome-terminal lm-sensors xclip jq wireguard resolvconf curl bat snapd brave-browser -y
+sudo apt-get install make gcc libxcb-xinerama0-dev libxcb-icccm4-dev libxcb-randr0-dev libxcb-util0-dev libxcb-ewmh-dev libxcb-keysyms1-dev libxcb-shape0-dev polybar bspwm sxhkd rofi feh python3-pip net-tools gnome-terminal lm-sensors xclip jq wireguard resolvconf curl bat snapd brave-browser code -y
 sudo systemctl enable snapd.socket && sudo systemctl start snapd.socket
 sudo ln -s /var/lib/snapd/snap /snap
 
@@ -37,6 +42,7 @@ git clone https://github.com/baskerville/bspwm.git
 git clone https://github.com/baskerville/sxhkd.git
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/Hack.zip
 git clone https://github.com/lr-tech/rofi-themes-collection.git
+wget "https://github.com/bitwarden/clients/releases/download/desktop-v2022.5.1/Bitwarden-2022.5.1-amd64.deb"
 
 # Install
 
@@ -48,6 +54,8 @@ cd rofi-themes-collection
 mkdir -p ~/.local/share/rofi/themes/
 cp themes/rounded-common.rasi ~/.local/share/rofi/themes/
 cp themes/rounded-blue-dark.rasi ~/.local/share/rofi/themes/
+cd /home/$user/Downloads
+sudo dpkg -i Bitwarden*.deb
 
 # Configs
 
@@ -59,7 +67,7 @@ cp -r $dir/modules/ /home/$user/.config/polybar/
 cp $dir/config/bspwm_resize /home/$user/.config/bspwm/scripts/bspwm_resize
 cp $dir/images/wallpaper.png /home/$user/Pictures/wallpaper.png
 sudo cp $dir/utils/set_target /usr/bin/set_target
-sudo cp $dir/utils/bitwarden /usr/bin/bitwarden
+sudo cp $dir/utils/bitw /usr/bin/bitw
 sudo cp $dir/utils/brave /usr/bin/brave
 cp /etc/X11/xinit/xinitrc /home/$user/.xinitrc
 echo "exec bspwm" >> /home/$user/.xinitrc
@@ -77,14 +85,11 @@ chmod u+x /home/$user/.config/polybar/launch.sh
 chmod u+x /home/$user/.config/bspwm/scripts/bspwm_resize
 chmod +x /home/$user/.config/polybar/modules/*.sh
 sudo chmod +x /usr/bin/set_target
-sudo chmod +x /usr/bin/bitwarden
+sudo chmod +x /usr/bin/bitw
 sudo chmod +x /usr/bin/brave
 
 # Snaps installation
 
-sleep 10
-sudo snap install code --classic
-sudo snap install bitwarden
 
 # Security
 
@@ -96,7 +101,7 @@ openssl pkeyutl -encrypt -pubin -inkey /home/$user/Credentials/.keys/public_key.
 
 # Clean
 
-sudo rm -r /home/$user/Downloads/bspwm /home/$user/Downloads/sxhkd /home/$user/Downloads/rofi-themes-collection /home/$user/Downloads/Hack.zip
+sudo rm -r /home/$user/Downloads/bspwm /home/$user/Downloads/sxhkd /home/$user/Downloads/rofi-themes-collection /home/$user/Downloads/Hack.zip /home/$user/Downloads/Bitwarden*.deb
 
 # Additional config
 
