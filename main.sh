@@ -51,13 +51,13 @@ cp themes/rounded-blue-dark.rasi ~/.local/share/rofi/themes/
 
 # Configs
 
-cp $dir/bspwmrc /home/$user/.config/bspwm/
-cp $dir/sxhkdrc /home/$user/.config/sxhkd/
-cp $dir/config.ini /home/$user/.config/polybar/
-cp $dir/launch.sh /home/$user/.config/polybar/
+cp $dir/config/bspwmrc /home/$user/.config/bspwm/
+cp $dir/config/sxhkdrc /home/$user/.config/sxhkd/
+cp $dir/config/config.ini /home/$user/.config/polybar/
+cp $dir/config/launch.sh /home/$user/.config/polybar/
 cp -r $dir/modules/ /home/$user/.config/polybar/
-cp $dir/bspwm_resize /home/$user/.config/bspwm/scripts/bspwm_resize
-cp $dir/wallpaper.png /home/$user/Pictures/wallpaper.png
+cp $dir/config/bspwm_resize /home/$user/.config/bspwm/scripts/bspwm_resize
+cp $dir/images/wallpaper.png /home/$user/Pictures/wallpaper.png
 sudo cp $dir/utils/set_target /usr/bin/set_target
 sudo cp $dir/utils/bitwarden /usr/bin/bitwarden
 sudo cp $dir/utils/brave /usr/bin/brave
@@ -66,7 +66,7 @@ echo "exec bspwm" >> /home/$user/.xinitrc
 sudo cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
 sudo cp /etc/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf.old
 sudo sed -i 's/#autologin-user=/autologin-user='$user'/g' /etc/lightdm/lightdm.conf
-sudo sed -i 's/theme-name=Kali Light/theme-name=elementary Dark/g' /etc/lightdm/lightdm-gtk-greeter.conf
+sudo sed -i 's/theme-name=Kali Light/theme-name=Kali Dark/g' /etc/lightdm/lightdm-gtk-greeter.conf
 sudo sed -i 's/font-name=Cantarell 11/font-name=Hack Nerd Font 10/g' /etc/lightdm/lightdm-gtk-greeter.conf
 sudo sed -i 's/"background=/usr/share/images/desktop-base/login-background.svg"/"/home/$user/Pictures/wallpaper.png"/g' /etc/lightdm/lightdm-gtk-greeter.conf
 
@@ -101,3 +101,4 @@ sudo rm -r /home/$user/Downloads/bspwm /home/$user/Downloads/sxhkd /home/$user/D
 # Additional config
 
 set_target localhost
+sudo systemctl restart lightdm.service
