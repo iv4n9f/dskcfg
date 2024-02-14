@@ -34,6 +34,7 @@ sudo chown -R $user:$user /home/$user/Credentials /home/$user/Projects /home/$us
 mkdir -p /home/$user/.config/{bspwm,sxhkd,polybar}
 mkdir /home/$user/.config/bspwm/scripts/
 mkdir /home/$user/.config/polybar/modules/
+mkdir -p /usr/share/pictures
 
 # Download 
 
@@ -66,17 +67,13 @@ cp $dir/config/launch.sh /home/$user/.config/polybar/
 cp -r $dir/modules/ /home/$user/.config/polybar/
 cp $dir/config/bspwm_resize /home/$user/.config/bspwm/scripts/bspwm_resize
 cp $dir/images/wallpaper.png /home/$user/Pictures/wallpaper.png
+cp $dir/images/wallpaper.png /usr/share/pictures/wallpaper.png
+sudo cp $dir/config/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
 sudo cp $dir/utils/set_target /usr/bin/set_target
 sudo cp $dir/utils/bitw /usr/bin/bitw
 sudo cp $dir/utils/brave /usr/bin/brave
 cp /etc/X11/xinit/xinitrc /home/$user/.xinitrc
 echo "exec bspwm" >> /home/$user/.xinitrc
-sudo cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
-sudo cp /etc/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf.old
-sudo sed 's/#autologin-user=/autologin-user='$user'/g' /etc/lightdm/lightdm.conf
-sudo sed 's/theme-name=Kali Light/theme-name=Kali Dark/g' /etc/lightdm/lightdm-gtk-greeter.conf
-sudo sed 's/font-name=Cantarell 11/font-name=Hack Nerd Font 10/g' /etc/lightdm/lightdm-gtk-greeter.conf
-sudo sed 's|"background=/usr/share/images/desktop-base/login-background.svg"|"background=/home/'$user'/Pictures/wallpaper.png"/g' /etc/lightdm/lightdm-gtk-greeter.conf
 
 # Permisisions
 
@@ -111,3 +108,4 @@ sudo rm -r /home/$user/Downloads/bspwm /home/$user/Downloads/sxhkd /home/$user/D
 
 set_target localhost
 sudo systemctl restart lightdm.service
+sudo logout
