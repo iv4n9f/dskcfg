@@ -4,10 +4,10 @@ Desktop Configuration
 
 For installation : 
 
-cd ~ && mkdir -p Repositories && cd Repositories
-git clone https://github.com/iv4n9f/dskcfg
-cd dskcfg && sed -i s/password="password"/password="(Your bitwarden password if you want, if you dont want it , please remove this part or set it as 'password')"/g main.sh && chmod +x main.sh
-./main.sh
+cd ~ && mkdir -p Repositories && cd Repositories \n
+git clone https://github.com/iv4n9f/dskcfg \n
+cd dskcfg && chmod +x main.sh \n
+./main.sh \n
 
 Tested in :
 
