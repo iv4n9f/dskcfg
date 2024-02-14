@@ -24,7 +24,9 @@ fi
 ESCAPED_PASSWORD=$(printf %s "$PASSWORD" | sed 's/[\/&]/\\&/g')
 
 CREDENTIALS_FILE="/etc/davfs2/secrets"
+sudo chmod 666 "$CREDENTIALS_FILE"
 sudo echo -e "$DAVFS_URL $USERNAME $ESCAPED_PASSWORD" >> "$CREDENTIALS_FILE"
+sudo chmod 600 "$CREDENTIALS_FILE"
 
 echo "Mounting DAVFS share..."
 sudo mount -t davfs "$DAVFS_URL" "$MOUNT_POINT" -o rw,uid=$(id -u),gid=$(id -g)
