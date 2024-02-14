@@ -73,10 +73,10 @@ cp /etc/X11/xinit/xinitrc /home/$user/.xinitrc
 echo "exec bspwm" >> /home/$user/.xinitrc
 sudo cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
 sudo cp /etc/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf.old
-sudo sed -i 's/#autologin-user=/autologin-user='$user'/g' /etc/lightdm/lightdm.conf
-sudo sed -i 's/theme-name=Kali Light/theme-name=Kali Dark/g' /etc/lightdm/lightdm-gtk-greeter.conf
-sudo sed -i 's/font-name=Cantarell 11/font-name=Hack Nerd Font 10/g' /etc/lightdm/lightdm-gtk-greeter.conf
-sudo sed -i 's/"background=/usr/share/images/desktop-base/login-background.svg"/"/home/$user/Pictures/wallpaper.png"/g' /etc/lightdm/lightdm-gtk-greeter.conf
+sudo sed 's/#autologin-user=/autologin-user='$user'/g' /etc/lightdm/lightdm.conf
+sudo sed 's/theme-name=Kali Light/theme-name=Kali Dark/g' /etc/lightdm/lightdm-gtk-greeter.conf
+sudo sed 's/font-name=Cantarell 11/font-name=Hack Nerd Font 10/g' /etc/lightdm/lightdm-gtk-greeter.conf
+sudo sed 's|"background=/usr/share/images/desktop-base/login-background.svg"|"background=/home/'$user'/Pictures/wallpaper.png"/g' /etc/lightdm/lightdm-gtk-greeter.conf
 
 # Permisisions
 
