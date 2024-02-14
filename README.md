@@ -12,6 +12,7 @@ cd dskcfg && chmod +x main.sh
 ```
 
 For the configuration of the bitwarden password encryption please change the variable "password" in the ```main.sh``` file.
+For the configuration of the davfs2 folder automount please change the variables of the section davfs2 in the ```main.sh``` file.
 
 ## Description
 
@@ -35,6 +36,7 @@ This repository installs a default desktop configuration for my own system you c
 - ```brave```
 - ```bitwarden```
 - ```code```
+- ```set_target```
 
 ## Test
 
