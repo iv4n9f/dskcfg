@@ -17,10 +17,11 @@ For the configuration of the bitwarden password encryption please change the var
 
 This repository installs a default desktop configuration for my own system you can use it, but remember to change it to suit your personal needs.
 
-```
-windows manager, shortcut manager and bar :
-
-bspwm + sxhkd
+### Window Manager
+bswpm
+### Shortcut Manager
+sxhkd
+### Bar
 polybar
 
 bar modules for :
