@@ -12,7 +12,7 @@ user=$(whoami)
 
 # Initial Setup and installs
 
-timedatectl set-timezone $timezone
+sudo timedatectl set-timezone $timezone
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list 
 sudo apt install wget gpg apt-transport-https -y
@@ -93,11 +93,15 @@ sudo chmod +x /usr/bin/brave
 
 # Security
 
-echo "$password" > /home/$user/Credentials/bit.pas
-mkdir -p /home/$user/Credentials/.tmp /home/$user/Credentials/.keys
-openssl genpkey -algorithm RSA -out /home/$user/Credentials/.keys/private_key.pem
-openssl rsa -pubout -in /home/$user/Credentials/.keys/private_key.pem -out /home/$user/Credentials/.keys/public_key.pem
-openssl pkeyutl -encrypt -pubin -inkey /home/$user/Credentials/.keys/public_key.pem -in /home/$user/Credentials/bit.pas -out /home/$user/Credentials/bit.enc && rm /home/$user/Credentials/bit.pas
+if [[ $password != "password" ]]; then
+    echo "$password" > /home/$user/Credentials/bit.pas
+    mkdir -p /home/$user/Credentials/.tmp /home/$user/Credentials/.keys
+    openssl genpkey -algorithm RSA -out /home/$user/Credentials/.keys/private_key.pem
+    openssl rsa -pubout -in /home/$user/Credentials/.keys/private_key.pem -out /home/$user/Credentials/.keys/public_key.pem
+    openssl pkeyutl -encrypt -pubin -inkey /home/$user/Credentials/.keys/public_key.pem -in /home/$user/Credentials/bit.pas -out /home/$user/Credentials/bit.enc && rm /home/$user/Credentials/bit.pas
+else
+    echo "You need to set a password"
+fi
 
 # Clean
 
