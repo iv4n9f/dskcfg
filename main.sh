@@ -5,6 +5,12 @@
 password="password"
 timezone="Europe/Madrid"
 
+# If you want setup davfs mount uncomment the following lines and set the variables
+# davfs_url="https://example.com"
+# davfs_user="example_user"
+# davfs_password="example_password"
+# davfs_mount_point="/mnt/example"
+
 # Variables
 
 dir=$(pwd)
@@ -23,7 +29,7 @@ rm -f packages.microsoft.gpg
 
 
 sudo apt update
-sudo apt-get install make gcc libxcb-xinerama0-dev libxcb-icccm4-dev libxcb-randr0-dev libxcb-util0-dev libxcb-ewmh-dev libxcb-keysyms1-dev libxcb-shape0-dev polybar bspwm sxhkd rofi feh python3-pip net-tools gnome-terminal lm-sensors xclip jq wireguard resolvconf curl bat snapd brave-browser code -y
+sudo apt-get install make gcc libxcb-xinerama0-dev libxcb-icccm4-dev libxcb-randr0-dev libxcb-util0-dev libxcb-ewmh-dev libxcb-keysyms1-dev libxcb-shape0-dev polybar bspwm sxhkd rofi feh python3-pip net-tools gnome-terminal lm-sensors xclip jq wireguard resolvconf curl bat snapd brave-browser code davfs2 -y
 sudo systemctl enable snapd.socket && sudo systemctl start snapd.socket
 sudo ln -s /var/lib/snapd/snap /snap
 
@@ -35,6 +41,7 @@ mkdir -p /home/$user/.config/{bspwm,sxhkd,polybar}
 mkdir /home/$user/.config/bspwm/scripts/
 mkdir /home/$user/.config/polybar/modules/
 mkdir -p /usr/share/pictures
+mkdir -p $davfs_mount_point
 
 # Download 
 
@@ -72,6 +79,7 @@ sudo cp $dir/config/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.co
 sudo cp $dir/utils/set_target /usr/bin/set_target
 sudo cp $dir/utils/bitw /usr/bin/bitw
 sudo cp $dir/utils/brave /usr/bin/brave
+sudo cp $dir/utils/mount_dav /usr/bin/mount_dav
 cp /etc/X11/xinit/xinitrc /home/$user/.xinitrc
 echo "exec bspwm" >> /home/$user/.xinitrc
 
@@ -84,6 +92,7 @@ chmod +x /home/$user/.config/polybar/modules/*.sh
 sudo chmod +x /usr/bin/set_target
 sudo chmod +x /usr/bin/bitw
 sudo chmod +x /usr/bin/brave
+sudo chmod +x /usr/bin/mount_dav
 
 # Snaps installation
 
@@ -106,6 +115,7 @@ sudo rm -r /home/$user/Downloads/bspwm /home/$user/Downloads/sxhkd /home/$user/D
 
 # Additional config
 
+mount_dav $davfs_url $davfs_user $davfs_password $davfs_mount_point
 set_target localhost
 sudo systemctl restart lightdm.service
 sudo logout
