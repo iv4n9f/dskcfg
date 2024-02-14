@@ -2,7 +2,7 @@
 
 ## Installation
 
-For the default install : 
+For the default installation : 
 
 ```
 cd ~ && mkdir -p Repositories && cd Repositories
