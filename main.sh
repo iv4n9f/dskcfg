@@ -3,7 +3,9 @@
 # Setup your config
 
 password="password"
+usb_key_uid="usb_key_uid"
 timezone="Europe/Madrid"
+usb_key_device=$(sudo blkid -sUUID | grep $usb_key_uid | cut -d ":" -f 1)
 
 # If you want setup davfs mount uncomment the following lines and set the variables
 # davfs_url="https://example.com"
@@ -42,6 +44,7 @@ mkdir /home/$user/.config/bspwm/scripts/
 mkdir /home/$user/.config/polybar/modules/
 mkdir -p /usr/share/pictures
 sudo mkdir -p $davfs_mount_point
+sudo mkdir -p /mnt/key
 
 # Download 
 
@@ -95,14 +98,22 @@ sudo chmod +x /usr/bin/mount_dav
 # Snaps installation
 
 
+
 # Security
 
+
+
 if [[ $password != "password" ]]; then
+    sudo chmod 666 /etc/fstab
+    echo "UUID=$usb_key_uid /mnt/key auto defaults,user 0 0" >> /etc/fstab
+    sudo chmod 660 /etc/fstab
+    sudo systemctl daemon-reload
+    sudo mount -a
     echo "$password" > /home/$user/Credentials/kee.pas
-    mkdir -p /home/$user/Credentials/.tmp /home/$user/Credentials/.keys
-    openssl genpkey -algorithm RSA -out /home/$user/Credentials/.keys/private_key.pem
-    openssl rsa -pubout -in /home/$user/Credentials/.keys/private_key.pem -out /home/$user/Credentials/.keys/public_key.pem
-    openssl pkeyutl -encrypt -pubin -inkey /home/$user/Credentials/.keys/public_key.pem -in /home/$user/Credentials/kee.pas -out /home/$user/Credentials/kee.enc && rm /home/$user/Credentials/kee.pas
+    mkdir -p /home/$user/Credentials/.tmp  /mnt/key/.keys
+    openssl genpkey -algorithm RSA -out /mnt/key/.keys/private_key.pem
+    openssl rsa -pubout -in /mnt/key/.keys/private_key.pem -out /mnt/key/.keys/public_key.pem
+    openssl pkeyutl -encrypt -pubin -inkey /mnt/key/.keys/public_key.pem -in /home/$user/Credentials/kee.pas -out /home/$user/Credentials/kee.enc && rm /home/$user/Credentials/kee.pas
 else
     echo "You need to set a password"
 fi
