@@ -42,7 +42,7 @@ sudo chown -R $user:$user /home/$user/Credentials /home/$user/Projects /home/$us
 mkdir -p /home/$user/.config/{bspwm,sxhkd,polybar}
 mkdir /home/$user/.config/bspwm/scripts/
 mkdir /home/$user/.config/polybar/modules/
-mkdir -p /usr/share/pictures
+sudo mkdir -p /usr/share/pictures
 sudo mkdir -p $davfs_mount_point
 sudo mkdir -p /mnt/key
 
@@ -97,23 +97,20 @@ sudo chmod +x /usr/bin/mount_dav
 
 # Snaps installation
 
-
-
 # Security
-
-
 
 if [[ $password != "password" ]]; then
     sudo chmod 666 /etc/fstab
     echo "UUID=$usb_key_uid /mnt/key auto defaults,user 0 0" >> /etc/fstab
-    sudo chmod 660 /etc/fstab
+    sudo chmod 600 /etc/fstab
     sudo systemctl daemon-reload
     sudo mount -a
     echo "$password" > /home/$user/Credentials/kee.pas
-    mkdir -p /home/$user/Credentials/.tmp  /mnt/key/.keys
-    openssl genpkey -algorithm RSA -out /mnt/key/.keys/private_key.pem
-    openssl rsa -pubout -in /mnt/key/.keys/private_key.pem -out /mnt/key/.keys/public_key.pem
-    openssl pkeyutl -encrypt -pubin -inkey /mnt/key/.keys/public_key.pem -in /home/$user/Credentials/kee.pas -out /home/$user/Credentials/kee.enc && rm /home/$user/Credentials/kee.pas
+    mkdir -p /home/$user/Credentials/.tmp  
+    sudo mkdir -p /mnt/key/.keys
+    sudo openssl genpkey -algorithm RSA -out /mnt/key/.keys/private_key.pem
+    sudo openssl rsa -pubout -in /mnt/key/.keys/private_key.pem -out /mnt/key/.keys/public_key.pem
+    sudo openssl pkeyutl -encrypt -pubin -inkey /mnt/key/.keys/public_key.pem -in /home/$user/Credentials/kee.pas -out /home/$user/Credentials/kee.enc && rm /home/$user/Credentials/kee.pas
 else
     echo "You need to set a password"
 fi
