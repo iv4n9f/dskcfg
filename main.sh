@@ -114,5 +114,3 @@ sudo rm -r /home/$user/Downloads/bspwm /home/$user/Downloads/sxhkd /home/$user/D
 
 mount_dav $davfs_url $davfs_user $davfs_password $davfs_mount_point
 set_target localhost
-sudo systemctl restart lightdm.service
-sudo logout
