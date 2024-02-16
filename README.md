@@ -1,4 +1,4 @@
-# dskcfg - Desktop Configuration
+# Kali Linux Environment Configurator
 
 ## Installation
 
