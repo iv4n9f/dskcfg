@@ -28,7 +28,7 @@ rm -f packages.microsoft.gpg
 
 
 sudo apt update
-sudo apt-get install make gcc libxcb-xinerama0-dev libxcb-icccm4-dev libxcb-randr0-dev libxcb-util0-dev libxcb-ewmh-dev libxcb-keysyms1-dev libxcb-shape0-dev polybar bspwm sxhkd rofi feh python3-pip net-tools gnome-terminal lm-sensors xclip jq wireguard resolvconf curl bat snapd  code davfs2 keepasxc torbrowser-launcher -y
+sudo apt-get install make gcc libxcb-xinerama0-dev libxcb-icccm4-dev libxcb-randr0-dev libxcb-util0-dev libxcb-ewmh-dev libxcb-keysyms1-dev libxcb-shape0-dev polybar bspwm sxhkd rofi feh python3-pip net-tools gnome-terminal lm-sensors xclip jq wireguard resolvconf curl bat snapd  code davfs2 keepassxc torbrowser-launcher -y
 sudo systemctl enable snapd.socket && sudo systemctl start snapd.socket
 sudo ln -s /var/lib/snapd/snap /snap
 
