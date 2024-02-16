@@ -19,6 +19,7 @@ user=$(whoami)
 # Initial Setup and installs
 
 sudo timedatectl set-timezone $timezone
+sudo add-apt-repository ppa:phoerious/keepassxc
 sudo apt install wget gpg apt-transport-https -y
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
 sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
